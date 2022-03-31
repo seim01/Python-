@@ -1,0 +1,61 @@
+## 1. Aquí pide ingresar la expresión en binario 
+import random
+n,w = int(input('Escribe la cantidad de dígitos binarios que deseas ingresar ')),0
+x = range(20)
+lista,lista_ampliada=[],[]
+print('ingresa uno por uno los dígitos binarios ')
+for i in range(n):
+  lista.append(int(input()))
+## 2. Aquí triplica la información (triplica cada dígito binario ingresado)
+for i in range(n):
+  if lista[i]==0:
+    while w<=2:
+      lista_ampliada.append(0)
+      w+=1
+    w=0
+  else:
+    while w<=2:
+      lista_ampliada.append(1)
+      w+=1
+    w=0
+print('La expresión binaria ampliada es:')      
+for i in range(len(lista_ampliada)):
+  print(lista_ampliada[i], end='')
+## 2. Procede con la simulación del ruido que modifica la información 
+k=1
+for j in range(len(lista_ampliada)):
+  if lista_ampliada[j]==0:
+    proba1=random.choice(x)
+    if proba1>17:          # 10% de probabilidad de cambiar si es 0
+      lista_ampliada[j]=1
+      i=3*k
+      k+=1
+  else:
+    proba2=random.choice(x)
+    if proba2>18:          # 5% de probabilidad de cambiar si es 1
+      lista_ampliada[j]=0
+      i=3*k
+      k+=1
+print('\n La expresión binaria ampliada y con ruido es:')      
+for i in range(len(lista_ampliada)):
+  print(lista_ampliada[i], end='')  # muestra el mensaje en binario y sus errores por el ruido (si hubo alguno)
+## 3. Corregir la información si ésta ha sido modificada 
+lista_corregida=[]
+cont,conts,j=0,0,0 # variables de cuenta
+for i in range(len(lista_ampliada)):
+  if lista_ampliada[i]==1:
+    cont+=1
+    if cont==2:
+      lista_corregida.append(1)
+      cont=0
+  else:
+    conts+=1
+    if conts==2:
+      lista_corregida.append(0)
+      conts=0
+  if i==3*j+2:
+    cont,conts=0,0
+    j+=1
+print('\n El mensaje original en binario corregido del ruido es: ')
+for i in range(len(lista_corregida)):
+  print(lista_corregida[i], end='')
