@@ -23,6 +23,7 @@ for i in range(len(lista_ampliada)):
   print(lista_ampliada[i], end='')
 ## 2. Procede con la simulación del ruido que modifica la información 
 k=1
+error=0
 for j in range(len(lista_ampliada)):
   if lista_ampliada[j]==0:
     proba1=random.choice(x)
@@ -30,15 +31,18 @@ for j in range(len(lista_ampliada)):
       lista_ampliada[j]=1
       i=3*k
       k+=1
+      error+=1
   else:
     proba2=random.choice(x)
     if proba2>18:          # 5% de probabilidad de cambiar si es 1
       lista_ampliada[j]=0
       i=3*k
       k+=1
+      error+=1
 print('\n La expresión binaria ampliada y con ruido es:')      
 for i in range(len(lista_ampliada)):
   print(lista_ampliada[i], end='')  # muestra el mensaje en binario y sus errores por el ruido (si hubo alguno)
+print(f' - {error} dígitos han sido modificados')
 ## 3. Corregir la información si ésta ha sido modificada 
 lista_corregida=[]
 cont,conts,j=0,0,0 # variables de cuenta
@@ -56,6 +60,6 @@ for i in range(len(lista_ampliada)):
   if i==3*j+2:
     cont,conts=0,0
     j+=1
-print('\n El mensaje original en binario corregido del ruido es: ')
+print('\n El mensaje original en binario corregido del ruido es:')
 for i in range(len(lista_corregida)):
   print(lista_corregida[i], end='')
