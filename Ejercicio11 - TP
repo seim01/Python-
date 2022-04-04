@@ -18,6 +18,10 @@ def turno1():
              n3=random.choice(y)
              numb1.append(n3)
              print(f'Tu último número es {n3} \n')
+    r4=input('¿Terminas tu turno? si(s) \n')
+    if r4 in ['s','S']:
+        for i in range(20):
+            print('\n')
 def turno2():
     print('\t --- TURNO JUGADOR 2  --- \n')
     r =input('¿Deseas ceder tu turno? si(s), no(n) \n')
@@ -35,6 +39,10 @@ def turno2():
              n3=random.choice(y)
              numb2.append(n3)
              print(f'Tu último número es {n3} \n')
+    r4=input('¿Terminas tu turno? si(s) \n')
+    if r4 in ['s','S']:
+        for i in range(20):
+            print('\n')
 def resultados():
     print(f'Valor de N = {N}')
     print(f'Numeros generados para el primer jugador {numb1}. Total {suma1}')
