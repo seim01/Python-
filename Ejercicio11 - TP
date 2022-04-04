@@ -1,0 +1,72 @@
+import random
+x,y,p1,p2,numb1,numb2,suma1,suma2=range(101),(range(31)),'s','s', [], [], 0, 0
+N = random.choice(x)
+def turno1():
+    print('\t --- TURNO JUGADOR 1 --- \n')
+    r =input('¿Deseas ceder tu turno? si(s), no(n) \n')
+    if r in ['n','N']:
+        n1=random.choice(y)
+        numb1.append(n1)
+        print(f'Tu primer número es {n1}')
+        r2=input('¿Deseas pedir otro número? si(s), no(n) \n')
+        if r2 in ['s','S']:
+          n2=random.choice(y)
+          numb1.append(n2)
+          print(f'Tu segundo número es {n2}')
+          r3=input('¿Deseas pedir otro número? si(s), no(n) \n')
+          if r3 in ['s','S']:
+             n3=random.choice(y)
+             numb1.append(n3)
+             print(f'Tu último número es {n3} \n')
+def turno2():
+    print('\t --- TURNO JUGADOR 2  --- \n')
+    r =input('¿Deseas ceder tu turno? si(s), no(n) \n')
+    if r in ['n','N']:
+        n1=random.choice(y)
+        numb2.append(n1)
+        print(f'Tu primer número es {n1}')
+        r2=input('¿Deseas pedir otro número? si(s), no(n) \n')
+        if r2 in ['s','S']:
+          n2=random.choice(y)
+          numb2.append(n2)
+          print(f'Tu segundo número es {n2}')
+          r3=input('¿Deseas pedir otro número? si(s), no(n) \n')
+          if r3 in ['s','S']:
+             n3=random.choice(y)
+             numb2.append(n3)
+             print(f'Tu último número es {n3} \n')
+def resultados():
+    print(f'Valor de N = {N}')
+    print(f'Numeros generados para el primer jugador {numb1}. Total {suma1}')
+    print(f'Numeros generados para el segundo jugador {numb2}. Total {suma2}')
+print('"\t \t \n \n********* COMIENZA EL JUEGO ********* \n')
+
+while p1 in ['S','s'] or p2 in ['S','s']:
+    if p1 in ['S','s']:
+        turno1()
+    if p2 in ['S','s']:
+        turno2()
+    if p1 in ['S','s']:
+        p1=input('¿El jugador 1 desea más turnos? si(s), no(n) \n')
+    if p2 in ['S','s']:
+        p2=input('¿El jugador 2 desea más turnos? si(s), no(n) \n')
+
+print('\t \t ********* TERMINA EL JUEGO ********* \n')
+for i in range(len(numb1)):
+     suma1+= numb1[i]
+for i in range(len(numb2)):
+     suma2+= numb2[i]
+resultados()
+if suma1>N and suma2>N:
+    print('Nadie gana')
+elif suma1 == N and suma2 ==N:
+    print('Hay empate')
+elif suma1>N and suma2<=N:
+    print(f'Gana el jugador 2 con una puntuación de {suma2}')
+elif suma1<=N and suma2>N:
+    print(f'Gana el jugador 1 con una puntuación de {suma1}')
+else:
+    if suma1>suma2:
+       print(f'Gana el jugador 1 con una puntuación de {suma1}')
+    else:
+        print(f'Gana el jugador 2 con una puntuación de {suma2}')
