@@ -1,0 +1,171 @@
+# PUNTO 12 - TALLER PARCIAL 1
+tb=[]
+conta1,conta2,conta_T1,conta_T2,conta_T3,conta_T4=[0,0],[0,0],0,0,0,0
+for i in range(8):
+    tb.append(['XX']*8)
+def tablero():
+    c1=1
+    print('\t \t \n \n********* TABLERO DE JUEGO ********* \n')
+    print('\t --Fichas blancas-- \n')
+    print('     1     2     3     4     5     6     7     8')
+    for i in tb:
+        print(f' {c1} {i}')
+        c1+=1
+    print('\n \t --Fichas negras-- \n')
+def reglas():
+    print(' Reglas e indicaciones:\n\n*La primera coordenada indica la fila y la segunda la columna.')
+    print('*El jugador 1 SOLO puede organizar sus fichas de la fila 1 a la 4 \n*El jugador 2 SOLO puede organizar sus fichas de la fila 5 a la 8')
+    print('*CN = Caballo Negro, PN = Peón Negro \n*CB = Caballo Blanco, PB = Peón Blanco\n\n')
+def ordenar():
+    print('Inicia el jugador 1 con las fichas blancas organizando sus peones y caballos en la parte superior\n')
+    j,k,l,m=0,0,0,0
+    for i in range(1,9):
+        print(f'Ingresa la posición de tu peón número {i}')
+        j,k=int(input('Primera coordenada ')),int(input('Segunda coordenada '))
+        l=j-1
+        m=k-1
+        if (l>7 or l<0) or (m>7 or m<0):
+                l,m,j=0,0,111
+        while tb[l][m]=='PB' or ((j>4 or j<1) or (k>8 or k<1)):
+            print('--Error: coordenadas ya elegidas/coordenadas fuera de rango, elige otras ')
+            j,k=int(input('Primera coordenada ')),int(input('Segunda coordenada '))
+            l,m=j-1,k-1
+            if (l>7 or l<0) or (m>7 or m<0):
+                l,m=0,0
+        tb[l][m]='PB'
+    for i in range(1,3):
+        print(f'\nIngresa la posición de tu caballo número {i}')
+        j,k=int(input('Primera coordenada ')),int(input('Segunda coordenada '))
+        l=j-1
+        m=k-1
+        if (l>7 or l<0) or (m>7 or m<0):
+                l,m,j=0,0,111
+        while tb[l][m]=='PB' or tb[l][m]=='CB'or ((j>4 or j<1) or (k>8 or k<1)):
+            print('--Error: coordenadas ya elegidas/coordenadas fuera de rango, elige otras ')
+            j,k=int(input('Primera coordenada ')),int(input('Segunda coordenada '))
+            l,m=j-1,k-1
+            if (l>7 or l<0) or (m>7 or m<0):
+                l,m=0,0
+        tb[l][m]='CB'
+    print('\n\n Ahora el jugador 2 con las fichas negras organiza sus peones y caballos\n\n')
+    for i in range(1,9):
+        print(f'Ingresa la posición de tu peón número {i}')
+        j,k=int(input('Primera coordenada ')),int(input('Segunda coordenada '))
+        l=j-1
+        m=k-1
+        if (l>7 or l<0) or (m>7 or m<0):
+                l,m,j=0,0,111
+        while tb[l][m]=='PN' or ((j<5 or j>8) or (k>8 or k<1)):
+            print('--Error: coordenadas ya elegidas/coordenadas fuera de rango, elige otras ')
+            j,k=int(input('Primera coordenada ')),int(input('Segunda coordenada '))
+            l,m=j-1,k-1
+            if (l>7 or l<0) or (m>7 or m<0):
+                l,m=0,0
+        tb[l][m]='PN'
+    for i in range(1,3):
+        print(f'\nIngresa la posición de tu caballo número {i}')
+        j,k=int(input('Primera coordenada ')),int(input('Segunda coordenada '))
+        l=j-1
+        m=k-1
+        if (l>7 or l<0) or (m>7 or m<0):
+                l,m,j=0,0,111
+        while tb[l][m]=='PN' or tb[l][m]=='CN'or ((j<5 or j>8) or (k>8 or k<1)):
+            print('--Error: coordenadas ya elegidas/coordenadas fuera de rango, elige otras ')
+            j,k=int(input('Primera coordenada ')),int(input('Segunda coordenada '))
+            l,m=j-1,k-1
+            if (l>7 or l<0) or (m>7 or m<0):
+                l,m=0,0
+        tb[l][m]='CN'
+def turno1():
+    cab_c,peon_c=0,0
+    print('\t ---- TURNO JUGADOR 1 ---- \n\t     (Fichas Blancas)\n')
+    print('Elige la posición en coordenadas del caballo que quieres mover ')
+    p1,p2=int(input('Primera coordenada(fila) ')),int(input('Segunda coordeanda(columna) '))
+    j,k=p1-1,p2-1
+    if (j>7 or j<0) or (k>7 or k<0):
+                j,k,p1=0,0,111
+    while tb[j][k]!='CB' or ((p1>8 or p1<1) or (p2>8 or p2<1)):
+        print('--Error: Estas coordenadas están vacías/tienen un peón/está fuera de rango, vuelve a ingresarlas ')
+        p1,p2=int(input('Primera coordenada(fila) ')),int(input('Segunda coordeanda(columna) '))
+        j,k=p1-1,p2-1
+        if (j>7 or j<0) or (k>7 or k<0):
+                j,k=0,0
+    print('Elige la posición en coordenadas a donde quieres mover el caballo ')
+    tb[j][k]='XX'
+    p3,p4=int(input('Primera coordenada(fila) ')),int(input('Segunda coordeanda(columna) '))
+    listac=[p3,p4]
+    j,k=p3-1,p4-1
+    if (j>7 or j<0) or (k>7 or k<0):
+                j,k,p3=0,0,111
+    while tb[j][k]=='CB'or (p3>8 or p3<1) or (p4>8 or p4<1) or (listac!=[p1-2,p2-1] and listac!=[p1-2,p2+1] and listac!=[p1-1,p2-2] and listac!=[p1-1,p2+2] and listac!=[p1+1,p2-2] and listac!=[p1+2,p2-1] and listac!=[p1+2,p2+1] and listac!=[p1+1,p2+2]):
+        print('--Error: no puedes mover tu caballo a esas coordenadas, ingresa otras ')
+        p3,p4=int(input('Primera coordenada(fila) ')),int(input('Segunda coordeanda(columna) '))
+        listac=[p3,p4]
+        j,k=p3-1,p4-1
+        if (j>7 or j<0) or (k>7 or k<0):
+                j,k=0,0
+    if tb[j][k]=='PN':
+        peon_c+=1
+    if tb[j][k]=='CN':
+        cab_c+=1
+    tb[j][k]='CB'
+    c1=cab_c
+    c2=peon_c
+    return [c1,c2]
+def turno2():
+    cab_c2,peon_c2=0,0
+    print('\t ---- TURNO JUGADOR 2 ---- \n\t     (Fichas Negras)\n')
+    print('Elige la posición en coordenadas del caballo que quieres mover ')
+    p1,p2=int(input('Primera coordenada(fila) ')),int(input('Segunda coordeanda(columna) '))
+    j,k=p1-1,p2-1
+    if (j>7 or j<0) or (k>7 or k<0):
+                j,k,p1=0,0,111
+    while tb[j][k]!='CN' or ((p1>8 or p1<1) or (p2>8 or p2<1)):
+        print('--Error: Estas coordenadas están vacías/tienen un peón/está fuera de rango, vuelve a ingresarlas ')
+        p1,p2=int(input('Primera coordenada(fila) ')),int(input('Segunda coordeanda(columna) '))
+        j,k=p1-1,p2-1
+        if (j>7 or j<0) or (k>7 or k<0):
+                j,k=0,0
+    print('Elige la posición en coordenadas a donde quieres mover el caballo ')
+    tb[j][k]='XX'
+    p3,p4=int(input('Primera coordenada(fila) ')),int(input('Segunda coordeanda(columna) '))
+    listac=[p3,p4]
+    j,k=p3-1,p4-1
+    if (j>7 or j<0) or (k>7 or k<0):
+                j,k,p3=0,0,111
+    while tb[j][k]=='CN'or (p3>8 or p3<1) or (p4>8 or p4<1) or (listac!=[p1-2,p2-1] and listac!=[p1-2,p2+1] and listac!=[p1-1,p2-2] and listac!=[p1-1,p2+2] and listac!=[p1+1,p2-2] and listac!=[p1+2,p2-1] and listac!=[p1+2,p2+1] and listac!=[p1+1,p2+2]):
+        print('--Error: no puedes mover tu caballo a esas coordenadas, ingresa otras ')
+        p3,p4=int(input('Primera coordenada(fila) ')),int(input('Segunda coordeanda(columna) '))
+        listac=[p3,p4]
+        j,k=p3-1,p4-1
+        if (j>7 or j<0) or (k>7 or k<0):
+                j,k=0,0
+    if tb[j][k]=='PB':
+        peon_c2+=1
+    if tb[j][k]=='CB':
+        cab_c2+=1
+    tb[j][k]='CN'
+    c3=cab_c2
+    c4=peon_c2
+    return [c3,c4]
+tablero()
+reglas()
+ordenar()
+tablero()
+while (conta_T1<2 and conta_T2<8) and (conta_T3<2 and conta_T4<8):
+    conta1=turno1()
+    tablero()
+    conta_T1+=conta1[0]
+    conta_T2+=conta1[1]
+    if conta_T1<2 and conta_T2<8:
+        conta2=turno2()
+        tablero()
+        conta_T3+=conta2[0]
+        conta_T4+=conta2[1]
+print('\n\n\n~~~~~~ TERMINA EL JUEGO ~~~~~~~\n')
+print('La posición final de las fichas es la siguiente ')
+tablero()
+if conta_T1==2 or conta_T2==8:
+    print('\n¡Gana el jugador 1 con las fichas blancas!\n\n')
+if conta_T3==2 or conta_T4==8:
+    print('\n¡Gana el jugador 2 con las fichas negras!\n\n')
